@@ -1,0 +1,13 @@
+# Render Blueprint Specification for TaskFlow Backend
+services:
+  - type: web
+    name: taskflow-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      # You can optionally add MONGODB_URI here in your Render dashboard,
+      # otherwise it defaults to the self-contained in-memory database!
