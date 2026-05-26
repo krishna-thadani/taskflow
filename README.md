@@ -60,41 +60,47 @@ taskflow/
 
 ---
 
-## Setup & Running Locally
+## Setup & Running
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18+ recommended, tested on v22)
 - npm (v10+)
 
-### 1. Running the Backend
-1. Open a terminal and navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-2. Install the backend dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the backend:
-   ```bash
-   npm start
-   ```
-   *Note: If no `MONGODB_URI` environment variable is defined in the `backend/.env` file, the server will automatically download, start, and connect to a local in-memory MongoDB database instance.*
+### Unified Running Mode (Single Link / Production)
+In this mode, the Express backend serves the React frontend assets directly. This aligns both the frontend and backend under a single port (`5000`), resolving all CORS issues.
 
-### 2. Running the Frontend
-1. Open a new terminal and navigate to the frontend directory:
+1. Navigate to the `frontend/` folder and build the React production bundle:
    ```bash
    cd frontend
+   npm run build
    ```
-2. Install the frontend dependencies:
+2. Navigate to the `backend/` folder and start the unified server:
    ```bash
-   npm install
+   cd ../backend
+   npm start
    ```
-3. Start the React app in development mode:
+3. Open your browser and navigate to **`http://localhost:5000/`** to see both the UI and the API.
+
+---
+
+### Separate Development Mode (For Code Changes)
+If you want to edit code with hot reloading (HMR) enabled:
+
+1. **Start the Backend API**:
    ```bash
+   cd backend
+   npm start
+   ```
+   *(Starts Express on `http://localhost:5000`)*
+
+2. **Start the Frontend Dev Server**:
+   ```bash
+   cd frontend
    npm run dev
    ```
-4. Open the displayed local address in your browser (typically `http://localhost:5173`).
+   *(Starts Vite on `http://localhost:5173` with HMR)*
+
+3. Open your browser and navigate to **`http://localhost:5173/`**.
 
 ---
 
