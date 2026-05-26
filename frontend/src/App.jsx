@@ -4,7 +4,7 @@ import Filters from './components/Filters';
 import TaskCard from './components/TaskCard';
 import TaskForm from './components/TaskForm';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/bfhl/tasks';
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/bfhl/tasks';
 
 export default function App() {
   const [tasks, setTasks] = useState([]);

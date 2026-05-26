@@ -1,10 +1,15 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
 import { connectDB } from './db.js';
 import taskRouter from './routes/tasks.js';
 
 dotenv.config();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -21,6 +26,20 @@ app.use('/bfhl/tasks', taskRouter);
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date() });
+});
+
+// Serve frontend static build files
+const frontendDistPath = path.join(__dirname, '../../frontend/dist');
+app.use(express.static(frontendDistPath));
+
+// For all other GET requests, serve React's index.html (Client-Side Routing)
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/bfhl')) return next();
+  res.sendFile(path.join(frontendDistPath, 'index.html'), (err) => {
+    if (err) {
+      res.status(200).send('TaskFlow API is running. Build the frontend to view the UI.');
+    }
+  });
 });
 
 // Global error handler
