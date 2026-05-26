@@ -1,5 +1,7 @@
 # TaskFlow — Smart Task Manager with Priority Scoring
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/krishna-thadani/taskflow)
+
 TaskFlow is a high-performance, visually stunning task management application built using the MERN stack (MongoDB, Express, React, Node.js). It computes task priority scores dynamically on the server based on deadlines and importance levels, and provides real-time statistics via MongoDB aggregation pipeline queries.
 
 ---
